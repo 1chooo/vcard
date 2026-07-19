@@ -65,9 +65,9 @@ const addJsonLd = (): JsonLdHtml => {
 
 function HomeLayout({ children }: { readonly children: React.ReactNode }) {
   return (
-    <ViewTransitions>
-      <html lang="en" className={`${roboto.variable} ${robotoMono.variable}`}>
-        <body>
+    <html lang="en" className={`${roboto.variable} ${robotoMono.variable}`}>
+      <body>
+        <ViewTransitions>
           <ProgressBar className="fixed top-0 h-1 bg-yellow-500">
             <Hello />
             <main>
@@ -108,9 +108,9 @@ function HomeLayout({ children }: { readonly children: React.ReactNode }) {
             googleAnalyticId={googleAnalyticId}
             googleTagManagerId={googleTagManagerId}
           />
-        </body>
-      </html>
-    </ViewTransitions>
+        </ViewTransitions>
+      </body>
+    </html>
   );
 }
 

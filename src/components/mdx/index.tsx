@@ -100,6 +100,10 @@ function Mdx(props: MDXRemoteProps) {
       {...props}
       components={{ ...components, ...props.components }}
       options={{
+        // Author-controlled MDX uses JSX expression props (e.g. badges={["react"]}).
+        // next-mdx-remote v6 defaults blockJS: true, which strips those expressions.
+        blockJS: false,
+        blockDangerousJS: true,
         mdxOptions: {
           rehypePlugins: [[rehypePrettyCode, options]],
           remarkPlugins: [remarkGfm],

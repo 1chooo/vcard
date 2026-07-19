@@ -17,7 +17,7 @@ import {
   useRef,
   useState,
 } from "react";
-import { Link as ViewTransitionsLink } from "next-view-transitions";
+import { useTransitionRouter } from "next-view-transitions";
 
 interface ProgressContextType {
   state: "initial" | "in-progress" | "completing" | "complete";
@@ -47,6 +47,29 @@ interface ProgressBarProps {
 export function ProgressBar({ className, children }: ProgressBarProps) {
   const progress = useProgress();
   const width = useMotionTemplate`${progress.value}%`;
+
+  useEffect(() => {
+    // next-view-transitions leaves ViewTransition.ready/finished uncaught.
+    // Aborts from slow navigations, hidden tabs, or interrupted transitions are benign.
+    const handleRejection = (event: PromiseRejectionEvent) => {
+      const reason = event.reason;
+      if (!(reason instanceof DOMException)) {
+        return;
+      }
+
+      if (
+        (reason.name === "InvalidStateError" ||
+          reason.name === "TimeoutError") &&
+        reason.message.includes("Transition was aborted")
+      ) {
+        event.preventDefault();
+      }
+    };
+
+    window.addEventListener("unhandledrejection", handleRejection);
+    return () =>
+      window.removeEventListener("unhandledrejection", handleRejection);
+  }, []);
 
   return (
     <ProgressBarContext.Provider value={progress}>
@@ -113,82 +136,116 @@ export function ProgressBarLink({
   );
 }
 
+function resolveHref(
+  href: ProgressBarLinkProps["href"],
+): string | null {
+  if (typeof href === "string") {
+    return href;
+  }
+
+  if (typeof href === "object" && href !== null) {
+    const { pathname, query } = href;
+    const searchParams = new URLSearchParams(query || {}).toString();
+    return `${pathname}${searchParams ? `?${searchParams}` : ""}`;
+  }
+
+  console.error("Invalid href prop");
+  return null;
+}
+
+function isModifiedClick(event: React.MouseEvent<HTMLAnchorElement>) {
+  const target = event.currentTarget.getAttribute("target");
+  return (
+    (target && target !== "_self") ||
+    event.metaKey ||
+    event.ctrlKey ||
+    event.shiftKey ||
+    event.altKey ||
+    event.nativeEvent.which === 2
+  );
+}
+
 export function ViewTransitionsProgressBarLink({
   href,
   children,
   ...props
 }: ProgressBarLinkProps) {
   const progress = useProgressBar();
-  const router = useRouter();
+  const router = useTransitionRouter();
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
-    progress.start();
-
-    let url: string;
-    if (typeof href === "string") {
-      url = href;
-    } else if (typeof href === "object" && href !== null) {
-      const { pathname, query } = href;
-      const searchParams = new URLSearchParams(query || {}).toString();
-      url = `${pathname}${searchParams ? `?${searchParams}` : ""}`;
-    } else {
-      console.error("Invalid href prop");
+    // Let the browser handle modified clicks (new tab, download, etc.).
+    if (isModifiedClick(e)) {
       return;
     }
 
-    startTransition(() => {
-      slideInOut();
-      router.push(url);
-      progress.done();
+    const url = resolveHref(href);
+    if (!url) {
+      return;
+    }
+
+    e.preventDefault();
+    progress.start();
+
+    // Single view-transition navigation. Previously this called slideInOut +
+    // plain router.push while also wrapping next-view-transitions Link, which
+    // started a second transition and caused InvalidStateError / TimeoutError.
+    router.push(url, {
+      onTransitionReady: slideInOut,
     });
+    progress.done();
   };
 
   return (
-    <ViewTransitionsLink href={href} onClick={handleClick} {...props}>
+    <Link href={href} onClick={handleClick} {...props}>
       {children}
-    </ViewTransitionsLink>
+    </Link>
   );
 }
 
 function slideInOut() {
-  document.documentElement.animate(
-    [
+  try {
+    document.documentElement.animate(
+      [
+        {
+          opacity: 1,
+          transform: "translate(0, 0)",
+        },
+        {
+          opacity: 0,
+          transform: "translate(-100px, 0)",
+        },
+      ],
       {
-        opacity: 1,
-        transform: "translate(0, 0)",
+        duration: 400,
+        easing: "ease",
+        fill: "forwards",
+        pseudoElement: "::view-transition-old(root)",
       },
-      {
-        opacity: 0,
-        transform: "translate(-100px, 0)",
-      },
-    ],
-    {
-      duration: 400,
-      easing: "ease",
-      fill: "forwards",
-      pseudoElement: "::view-transition-old(root)",
-    },
-  );
+    );
 
-  document.documentElement.animate(
-    [
+    document.documentElement.animate(
+      [
+        {
+          opacity: 0,
+          transform: "translate(100px, 0)",
+        },
+        {
+          opacity: 1,
+          transform: "translate(0, 0)",
+        },
+      ],
       {
-        opacity: 0,
-        transform: "translate(100px, 0)",
+        duration: 400,
+        easing: "ease",
+        fill: "forwards",
+        pseudoElement: "::view-transition-new(root)",
       },
-      {
-        opacity: 1,
-        transform: "translate(0, 0)",
-      },
-    ],
-    {
-      duration: 400,
-      easing: "ease",
-      fill: "forwards",
-      pseudoElement: "::view-transition-new(root)",
-    },
-  );
+    );
+  } catch {
+    // View transition pseudo-elements are unavailable when the transition was
+    // skipped/aborted (hidden tab, timeout, interrupted navigation).
+  }
 }
 
 function useProgress() {

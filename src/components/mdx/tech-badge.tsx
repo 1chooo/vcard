@@ -46,7 +46,7 @@ interface TechBadgeGroupProps {
  * <TechBadgeGroup badges={["python", "django"]} clickable={false} />
  */
 export function TechBadgeGroup({
-  badges,
+  badges = [],
   clickable = true,
   className = "flex flex-wrap gap-2",
 }: TechBadgeGroupProps) {
