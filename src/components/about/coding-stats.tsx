@@ -1,6 +1,8 @@
-import React from "react";
+"use client";
 
-import { GitHubCalendar } from 'react-github-calendar';
+import React, { useEffect, useState } from "react";
+
+import { GitHubCalendar } from "react-github-calendar";
 
 import { BlurFade } from "@/components/magicui/blur-fade";
 import Globe from "@/components/about/globe";
@@ -25,6 +27,12 @@ interface CodingStatsProps {
 }
 
 function CodingStats({ techStacks, githubUsername }: CodingStatsProps) {
+  const [showCalendar, setShowCalendar] = useState(false);
+
+  useEffect(() => {
+    setShowCalendar(true);
+  }, []);
+
   const yellowTheme = {
     light: ["#EBEBEB", "#FFDA6B"],
     dark: ["#383838", "#FFDA6B"],
@@ -84,16 +92,20 @@ function CodingStats({ techStacks, githubUsername }: CodingStatsProps) {
 
       <BlurFade inView delay={0.4} direction="up">
         <section id="github-calendar" className="text-light-gray mt-5">
-          <GitHubCalendar
-            username={githubUsername}
-            blockSize={12}
-            blockMargin={4}
-            colorScheme="dark"
-            blockRadius={2}
-            fontSize={14}
-            style={{ fontWeight: "bold" }}
-            theme={yellowTheme}
-          />
+          {showCalendar ? (
+            <GitHubCalendar
+              username={githubUsername}
+              blockSize={12}
+              blockMargin={4}
+              colorScheme="dark"
+              blockRadius={2}
+              fontSize={14}
+              style={{ fontWeight: "bold" }}
+              theme={yellowTheme}
+            />
+          ) : (
+            <div className="h-28" aria-hidden="true" />
+          )}
         </section>
       </BlurFade>
     </>
