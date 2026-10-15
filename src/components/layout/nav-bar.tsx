@@ -191,6 +191,43 @@ const NavBar = () => {
           </ViewTransitionsProgressBarLink>
         </li>
 
+        <li className="py-2 navbar-item">
+          <ViewTransitionsProgressBarLink
+            href="/showcase"
+            onClick={() => handleNavClick("Showcase", "/showcase")}
+            onMouseEnter={() => setHoveredPath("/showcase")}
+            onMouseLeave={() => setHoveredPath(null)}
+            className="relative block px-2 py-2 text-sm md:text-base lg:text-base duration-300 transition-colors hover:text-orange-yellow-crayola!"
+            style={{
+              color: isActive("/showcase") ? "#FFF" : "#888888",
+              fontWeight: isActive("/showcase") ? 700 : 500,
+            }}
+          >
+            Showcase
+
+            {hoveredPath === "/showcase" && (
+              <motion.div
+                layoutId="hover-bg"
+                className="absolute inset-0 bg-white/10 rounded-xl -z-10"
+              />
+            )}
+
+            {isActive("/showcase") && (
+              <motion.div
+                layoutId="active"
+                className="absolute bottom-0 left-0 right-0 h-0.5 bg-orange-yellow-crayola"
+              />
+            )}
+
+            {hoveredPath === "/showcase" && (
+              <motion.div
+                layoutId="hover"
+                className="absolute bottom-0 left-0 right-0 h-0.5 bg-white"
+              />
+            )}
+          </ViewTransitionsProgressBarLink>
+        </li>
+
         {/* <li className="py-2 navbar-item">
           <ViewTransitionsProgressBarLink
             href="/gallery"

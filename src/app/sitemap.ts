@@ -61,6 +61,7 @@ function sitemap(): MetadataRoute.Sitemap {
     "/resume",
     "/project",
     "/blog",
+    "/showcase",
     "/code-of-conduct",
     "/terms",
     "/cv",
