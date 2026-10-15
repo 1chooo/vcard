@@ -1,11 +1,9 @@
-import React, { Suspense } from "react";
 import type { Metadata, ResolvingMetadata } from "next";
 
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import Balancer from "react-wrap-balancer";
 import { ViewTransitionsProgressBarLink } from "@/components/progress-bar";
-import { ViewCounter } from "@/app/(home)/blog/view-counter";
 import { FadeLeft, FadeIn } from "@/components/animations/animations";
 import { FadeUpDiv } from "@/components/animations/animations";
 
@@ -103,13 +101,6 @@ export default async function Blog(props: Params) {
                   </time>
                 </div>
                 {post.readingTime && <span>{post.readingTime}</span>}
-                <span
-                  className="w-1 h-1 bg-current rounded-full mx-2"
-                  aria-hidden="true"
-                ></span>
-                <Suspense fallback={<div>Loading views...</div>}>
-                  <ViewCounter slug={post.slug} trackView />
-                </Suspense>
               </div>
             </div>
           </FadeUpDiv>
