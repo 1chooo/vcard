@@ -15,6 +15,7 @@
 /test-results/
 /playwright-report/
 /blob-report/
+/tests/visual/baseline/
 
 # production
 /build

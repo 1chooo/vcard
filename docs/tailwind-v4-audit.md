@@ -237,7 +237,7 @@ The repo browserslist (`>0.2%, not dead, not op_mini all`) is wider than Tailwin
 
 ## Visual diff
 
-Playwright compared 54 screenshots (9 routes, widths 390 / 768 / 1280, light and dark) against the v3 baselines in [tests/visual/baseline](../tests/visual/baseline). Result: 54 passed, 0 pixel differences (`maxDiffPixelRatio: 0`).
+Playwright compared 54 screenshots locally (9 routes, widths 390 / 768 / 1280, light and dark). Result: 54 passed, 0 pixel differences (`maxDiffPixelRatio: 0`). The screenshot files are not committed.
 
 Masked as non-deterministic: GitHub contribution calendars, globe canvases, iframes, and view counts. CSS animation and transition durations are forced to 0 inside the test so both captures show the settled UI.
 
