@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "git-commits": {
+      "source": "1chooo/skills",
+      "sourceType": "github",
+      "skillPath": "git-commits/SKILL.md",
+      "computedHash": "489bf746eb75d621b8ccdae8d63e2a20e5f1fae56cf9d838bd257cba4dab5b44"
+    }
+  }
+}
