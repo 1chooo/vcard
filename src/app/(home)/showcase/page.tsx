@@ -15,6 +15,7 @@ import { NavbarPreview } from "@/components/showcase/navbar-preview";
 import MotionSection from "@/components/showcase/motion-section";
 import TagPicker from "@/components/showcase/tag-picker";
 import WebVitals from "@/components/showcase/web-vitals";
+import ScrollMotion from "@/components/showcase/scroll-motion";
 import Testimonials from "@/components/testimonials";
 import PostsLoop from "@/components/showcase/posts-loop";
 import {
@@ -136,6 +137,10 @@ function Showcase() {
 
       <AboutSection id="motion" title="Motion">
         <MotionSection />
+      </AboutSection>
+
+      <AboutSection id="scroll-motion" title="Scroll Motion">
+        <ScrollMotion />
       </AboutSection>
     </article>
   );
