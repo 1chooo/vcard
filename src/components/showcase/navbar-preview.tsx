@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { motion } from "motion/react";
 
+import DesignList from "@/components/showcase/design-list";
+
 import styles from "@/styles/showcase/navbar-preview.module.css";
 
 const links = [
@@ -88,4 +90,15 @@ function CurrentNav() {
   );
 }
 
-export { ClassicNav, CurrentNav };
+function NavbarPreview() {
+  return (
+    <DesignList
+      items={[
+        { label: "Classic links", content: <ClassicNav /> },
+        { label: "Hover underline", content: <CurrentNav /> },
+      ]}
+    />
+  );
+}
+
+export { NavbarPreview };

@@ -9,9 +9,8 @@ import { Photos } from "@/components/about/photos";
 import { MyWritings } from "@/components/about/my-writings";
 import { PhotoGallery } from "@/components/photo-gallery";
 import ContactSection from "@/components/section/contact";
-import DesignChoice from "@/components/showcase/design-choice";
 import DesignList from "@/components/showcase/design-list";
-import { ClassicNav, CurrentNav } from "@/components/showcase/navbar-preview";
+import { NavbarPreview } from "@/components/showcase/navbar-preview";
 import MotionSection from "@/components/showcase/motion-section";
 import Testimonials from "@/components/testimonials";
 import PostsLoop from "@/components/showcase/posts-loop";
@@ -36,12 +35,11 @@ function Showcase() {
     <article>
       <PageTitle title="Showcase" />
       <p className="text-light-gray text-sm leading-6">
-        Section designs that used to sit on the about page. Switching a version
-        only changes this page.
+        Section designs that used to sit on the about page.
       </p>
 
       <AboutSection id="navbar" title="Navbar">
-        <DesignChoice earlier={<ClassicNav />} current={<CurrentNav />} />
+        <NavbarPreview />
       </AboutSection>
 
       <AboutSection id="contact" title="Contact">
