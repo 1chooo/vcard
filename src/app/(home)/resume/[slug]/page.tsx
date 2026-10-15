@@ -3,7 +3,6 @@ import type { Metadata, ResolvingMetadata } from "next";
 
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import Balancer from "react-wrap-balancer";
 import { ViewTransitionsProgressBarLink } from "@/components/progress-bar";
 import { FadeLeft, FadeIn } from "@/components/animations/animations";
 import { FadeUpDiv } from "@/components/animations/animations";
@@ -65,8 +64,8 @@ export default async function Resume(props: Params) {
             <div className="flex items-center gap-2 mb-4 text-light-gray-70 text-sm">
               <div className="text-light-gray">{post.category}</div>
             </div>
-            <h1 className="font-semibold text-4xl text-white-2 mb-8">
-              <Balancer>{post.title}</Balancer>
+            <h1 className="font-semibold text-4xl text-white-2 mb-8 text-balance">
+              {post.title}
             </h1>
           </FadeLeft>
 

@@ -80,6 +80,7 @@
   font-size: var(--fs-2);
   line-height: 1.3;
   display: inline-block;
+  text-wrap: balance;
   white-space: wrap;
   overflow: hidden;
   text-overflow: ellipsis;

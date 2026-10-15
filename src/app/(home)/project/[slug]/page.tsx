@@ -18,8 +18,6 @@ import Mdx from "@/components/mdx";
 import { PROJECT_DIRECTORY } from "@/lib/constants";
 import { ProjectLinks } from "@/components/project/project-links";
 
-import Balancer from "react-wrap-balancer";
-
 import config from "@/config";
 
 const { giscusConfig } = config;
@@ -64,8 +62,8 @@ export default async function Post(props: Params) {
             <div className="flex items-center gap-2 mb-4 text-light-gray-70 text-sm">
               <div className="text-light-gray">{post.category}</div>
             </div>
-            <h1 className="font-semibold text-4xl text-white-2 mb-8">
-              <Balancer>{post.title}</Balancer>
+            <h1 className="font-semibold text-4xl text-white-2 mb-8 text-balance">
+              {post.title}
             </h1>
           </FadeLeft>
 

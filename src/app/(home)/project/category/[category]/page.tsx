@@ -12,8 +12,6 @@ import { cn } from "@/lib/utils";
 
 import config from "@/config";
 import { NonClickableTechBadges } from "@/lib/tech-badge/utils";
-import Balancer from "react-wrap-balancer";
-
 import styles from "@/styles/project.module.css";
 import { ProjectPost } from "@/types/post";
 
@@ -148,9 +146,7 @@ export default async function ProjectCategory({
                         {post.category.toUpperCase()}
                       </p>
                     </div>
-                    <h3 className={cn(styles.title)}>
-                      <Balancer>{post.title}</Balancer>
-                    </h3>
+                    <h3 className={cn(styles.title)}>{post.title}</h3>
                   </div>
                   <div className="flex flex-wrap gap-2 mt-4 overflow-hidden relative max-h-16">
                     {post.techStack.map((badgeKey) => (

@@ -4,8 +4,6 @@ import Image from "next/image";
 import PageTitle from "@/components/page-title";
 import { ViewTransitionsProgressBarLink } from "@/components/progress-bar";
 
-import Balancer from "react-wrap-balancer";
-
 import config from "@/config";
 
 import { getBlogPosts } from "@/lib/api/mdx";
@@ -107,9 +105,7 @@ export default async function MdxBlog() {
                     <p className={cn(styles.category)}>
                       {post.category.toUpperCase()}
                     </p>
-                    <h3 className={cn(styles.title)}>
-                      <Balancer>{post.title}</Balancer>
-                    </h3>
+                    <h3 className={cn(styles.title)}>{post.title}</h3>
                   </div>
                   <time className={cn(styles.date)} dateTime={post.publishedAt}>
                     {new Date(post.publishedAt).toLocaleDateString("en-us", {
