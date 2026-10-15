@@ -10,10 +10,16 @@ import styles from "@/styles/gradient-card.module.css";
 import { cn } from "@/lib/utils";
 
 
-function TechStacksSidebar() {
+function TechStacksSidebar({
+  stacks,
+}: {
+  stacks?: Record<string, string[]>;
+} = {}) {
+  const groups = stacks ?? config.techStacks;
+
   return (
     <ul className="w-full mt-10 md:w-1/3 md:mt-0">
-      {Object.entries(config.techStacks).map(([category, badges]) => (
+      {Object.entries(groups).map(([category, badges]) => (
         <BlurFadeLi
           inView
           delay={0.4}

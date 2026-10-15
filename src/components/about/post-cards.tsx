@@ -18,16 +18,17 @@ import styles from "@/styles/gradient-card.module.css";
 
 interface PostCardsProps {
   posts: BlogPost[];
+  demo?: boolean;
 }
 
-function PostCards({ posts }: PostCardsProps) {
+function PostCards({ posts, demo = false }: PostCardsProps) {
   const ArrowRight = getIcon(ICON_NAMES.ARROW_RIGHT);
 
   return (
     <div className="w-full md:w-2/3 space-y-7">
       <ul className="space-y-6">
         {posts.map((post, index) => (
-          <PostCard key={post.slug} post={post} index={index} />
+          <PostCard key={post.slug} post={post} index={index} demo={demo} />
         ))}
       </ul>
       <BlurFade inView delay={0.4} direction="up">
@@ -37,12 +38,19 @@ function PostCards({ posts }: PostCardsProps) {
               "group rounded-full border border-black/5 bg-neutral-100 text-base text-white transition-all ease-in hover:cursor-pointer hover:bg-neutral-200 dark:border-white/5 dark:bg-neutral-900 dark:hover:bg-neutral-800",
             )}
           >
-            <ViewTransitionsProgressBarLink href="/blog">
-              <AnimatedShinyText className="inline-flex items-center justify-center px-4 py-1 transition ease-out hover:text-neutral-600 hover:duration-300 dark:hover:text-neutral-400">
+            {demo ? (
+              <AnimatedShinyText className="inline-flex items-center justify-center px-4 py-1">
                 <span>{"✨ View All My Writings"}</span>
-                <ArrowRight className="ml-1 size-3 transition-transform duration-300 ease-in-out group-hover:translate-x-0.5" />
+                <ArrowRight className="ml-1 size-3" />
               </AnimatedShinyText>
-            </ViewTransitionsProgressBarLink>
+            ) : (
+              <ViewTransitionsProgressBarLink href="/blog">
+                <AnimatedShinyText className="inline-flex items-center justify-center px-4 py-1 transition ease-out hover:text-neutral-600 hover:duration-300 dark:hover:text-neutral-400">
+                  <span>{"✨ View All My Writings"}</span>
+                  <ArrowRight className="ml-1 size-3 transition-transform duration-300 ease-in-out group-hover:translate-x-0.5" />
+                </AnimatedShinyText>
+              </ViewTransitionsProgressBarLink>
+            )}
           </div>
         </div>
       </BlurFade>
@@ -53,13 +61,16 @@ function PostCards({ posts }: PostCardsProps) {
 interface PostCardProps {
   post: BlogPost;
   index: number;
+  demo?: boolean;
 }
 
-function PostCard({ post, index }: PostCardProps) {
+function PostCard({ post, index, demo = false }: PostCardProps) {
   const router = useRouter();
   const postLink = `/blog/${post.slug}`;
 
   const handlePostClick = (link: string, title: string, slug: string) => {
+    if (demo) return;
+
     // Umami tracking
     if (typeof window !== "undefined" && window.umami) {
       window.umami.track("Click My Writings", {
@@ -82,17 +93,27 @@ function PostCard({ post, index }: PostCardProps) {
       inView
       delay={0.4}
       direction="up"
-      className={cn(styles.gradientCard, "group cursor-pointer")}
-      onClick={() => handlePostClick(postLink, post.title, post.slug)}
+      className={cn(styles.gradientCard, "group", !demo && "cursor-pointer")}
+      onClick={
+        demo
+          ? undefined
+          : () => handlePostClick(postLink, post.title, post.slug)
+      }
     >
       <div className="flex flex-col gap-1 overflow-hidden relative z-30 duration-300 ease-out group-hover:-translate-x-1 group-hover:-translate-y-1">
         <h2 className="flex items-center mb-3">
-          <ViewTransitionsProgressBarLink
-            href={postLink}
-            className="text-base font-bold leading-tight tracking-tight sm:text-lg sm:leading-7 text-white-1"
-          >
-            {post.title}
-          </ViewTransitionsProgressBarLink>
+          {demo ? (
+            <span className="text-base font-bold leading-tight tracking-tight sm:text-lg sm:leading-7 text-white-1">
+              {post.title}
+            </span>
+          ) : (
+            <ViewTransitionsProgressBarLink
+              href={postLink}
+              className="text-base font-bold leading-tight tracking-tight sm:text-lg sm:leading-7 text-white-1"
+            >
+              {post.title}
+            </ViewTransitionsProgressBarLink>
+          )}
           <svg
             className="group-hover:translate-x-0 shrink-0 translate-y-0.5 -translate-x-1 w-2.5 h-2.5 stroke-current ml-1 transition-all ease-in-out duration-200 transform text-light-gray"
             viewBox="0 0 13 15"

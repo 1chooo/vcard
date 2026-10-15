@@ -6,14 +6,18 @@ import LifeStyles from "@/components/about/life-styles";
 import CodingStats from "@/components/about/coding-stats";
 import TalkToHugo from "@/components/about/talk-to-hugo";
 import { Photos } from "@/components/about/photos";
+import { MyWritings } from "@/components/about/my-writings";
 import { PhotoGallery } from "@/components/photo-gallery";
 import ContactSection from "@/components/section/contact";
 import DesignChoice from "@/components/showcase/design-choice";
+import PostsLoop from "@/components/showcase/posts-loop";
 import {
   demoGithubUsername,
   demoLifestyles,
   demoPhotos,
+  demoPosts,
   demoTechStacks,
+  demoWritingStacks,
 } from "@/components/showcase/fixtures";
 
 import config from "@/config";
@@ -40,6 +44,20 @@ function Showcase() {
 
       <AboutSection id="life-styles" title="Life Styles">
         <LifeStyles lifestyles={demoLifestyles} />
+      </AboutSection>
+
+      <AboutSection id="writings" title="Writings">
+        <DesignChoice
+          earlier={<PostsLoop posts={demoPosts} />}
+          current={
+            <MyWritings
+              posts={demoPosts}
+              count={2}
+              demo
+              stacks={demoWritingStacks}
+            />
+          }
+        />
       </AboutSection>
 
       <AboutSection id="photos" title="Photos">
