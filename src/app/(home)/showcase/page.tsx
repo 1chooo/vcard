@@ -10,6 +10,7 @@ import { MyWritings } from "@/components/about/my-writings";
 import { PhotoGallery } from "@/components/photo-gallery";
 import ContactSection from "@/components/section/contact";
 import DesignChoice from "@/components/showcase/design-choice";
+import DesignList from "@/components/showcase/design-list";
 import { ClassicNav, CurrentNav } from "@/components/showcase/navbar-preview";
 import MotionSection from "@/components/showcase/motion-section";
 import Testimonials from "@/components/testimonials";
@@ -44,9 +45,11 @@ function Showcase() {
       </AboutSection>
 
       <AboutSection id="contact" title="Contact">
-        <DesignChoice
-          earlier={<TalkToHugo demo />}
-          current={<ContactSection demo />}
+        <DesignList
+          items={[
+            { label: "Talk to Hugo", content: <TalkToHugo demo /> },
+            { label: "Map and form", content: <ContactSection demo /> },
+          ]}
         />
       </AboutSection>
 
@@ -55,31 +58,41 @@ function Showcase() {
       </AboutSection>
 
       <AboutSection id="writings" title="Writings">
-        <DesignChoice
-          earlier={<PostsLoop posts={demoPosts} />}
-          current={
-            <MyWritings
-              posts={demoPosts}
-              count={2}
-              demo
-              stacks={demoWritingStacks}
-            />
-          }
+        <DesignList
+          items={[
+            { label: "Gradient cards", content: <PostsLoop posts={demoPosts} /> },
+            {
+              label: "Cards and tech stacks",
+              content: (
+                <MyWritings
+                  posts={demoPosts}
+                  count={2}
+                  demo
+                  stacks={demoWritingStacks}
+                />
+              ),
+            },
+          ]}
         />
       </AboutSection>
 
       <AboutSection id="photos" title="Photos">
-        <DesignChoice
-          earlier={
-            <Photos
-              images={demoPhotos.map((photo) => ({
-                img: photo.src,
-                title: photo.title,
-                alt: photo.alt,
-              }))}
-            />
-          }
-          current={<PhotoGallery images={demoPhotos} />}
+        <DesignList
+          items={[
+            {
+              label: "Tilted stack",
+              content: (
+                <Photos
+                  images={demoPhotos.map((photo) => ({
+                    img: photo.src,
+                    title: photo.title,
+                    alt: photo.alt,
+                  }))}
+                />
+              ),
+            },
+            { label: "Grid", content: <PhotoGallery images={demoPhotos} /> },
+          ]}
         />
       </AboutSection>
 
