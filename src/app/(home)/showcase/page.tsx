@@ -4,6 +4,9 @@ import PageTitle from "@/components/page-title";
 import AboutSection from "@/components/section/about";
 import LifeStyles from "@/components/about/life-styles";
 import CodingStats from "@/components/about/coding-stats";
+import TalkToHugo from "@/components/about/talk-to-hugo";
+import ContactSection from "@/components/section/contact";
+import DesignChoice from "@/components/showcase/design-choice";
 import {
   demoGithubUsername,
   demoLifestyles,
@@ -24,6 +27,13 @@ function Showcase() {
         Section designs that used to sit on the about page. Switching a version
         only changes this page.
       </p>
+
+      <AboutSection id="contact" title="Contact">
+        <DesignChoice
+          earlier={<TalkToHugo demo />}
+          current={<ContactSection demo />}
+        />
+      </AboutSection>
 
       <AboutSection id="life-styles" title="Life Styles">
         <LifeStyles lifestyles={demoLifestyles} />

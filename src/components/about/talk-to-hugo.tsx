@@ -8,20 +8,28 @@ import { BlurFade } from "@/components/magicui/blur-fade";
 import { Send } from "lucide-react";
 
 interface TalkToHugoProps {
-  web3formsAccessKey: string;
+  web3formsAccessKey?: string;
+  demo?: boolean;
 }
 
-function TalkToHugo({ web3formsAccessKey }: TalkToHugoProps) {
+function TalkToHugo({ web3formsAccessKey = "", demo = false }: TalkToHugoProps) {
   const inputRef = useRef<HTMLTextAreaElement | null>(null);
 
   const [result, setResult] = React.useState("");
 
-  const onSubmit = async (event) => {
+  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    if (demo) {
+      setResult("Form Submitted Successfully");
+      event.currentTarget.reset();
+      return;
+    }
+
     sendGTMEvent({ event: "message submit", value: inputRef.current?.value });
 
-    event.preventDefault();
     setResult("Sending....");
-    const formData = new FormData(event.target);
+    const formData = new FormData(event.currentTarget);
 
     formData.append("access_key", web3formsAccessKey);
 
@@ -34,7 +42,7 @@ function TalkToHugo({ web3formsAccessKey }: TalkToHugoProps) {
 
     if (data.success) {
       setResult("Form Submitted Successfully");
-      event.target.reset();
+      event.currentTarget.reset();
     } else {
       console.log("Error", data);
       setResult(data.message);
