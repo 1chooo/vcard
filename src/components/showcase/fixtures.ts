@@ -2,6 +2,7 @@ import { ICON_NAMES } from "@/components/icons";
 
 import type { LifeStyle } from "@/types/about";
 import type { BlogPost } from "@/types/post";
+import type { Testimonial } from "@/components/testimonials";
 
 const demoAuthor = {
   name: "Demo Author",
@@ -92,6 +93,27 @@ const demoPosts: BlogPost[] = [
   },
 ];
 
+const demoTestimonials: Testimonial[] = [
+  {
+    id: 1,
+    name: "Demo reader",
+    image: "/images/profile.webp",
+    text: "A short quote so the card can show the clamped excerpt and open the detail view.",
+  },
+  {
+    id: 2,
+    name: "Sample note",
+    image: "/images/profile.webp",
+    text: "A second card sits beside the first and keeps the row from looking empty.",
+  },
+  {
+    id: 3,
+    name: "Third quote",
+    image: "/images/profile.webp",
+    text: "A third card runs past the edge so the horizontal scrollbar has somewhere to go.",
+  },
+];
+
 const demoWritingStacks: Record<string, string[]> = {
   frontend: ["typescript", "react", "nextjs"],
   tools: ["python", "docker"],
@@ -103,5 +125,6 @@ export {
   demoPhotos,
   demoPosts,
   demoTechStacks,
+  demoTestimonials,
   demoWritingStacks,
 };

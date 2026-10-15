@@ -11,6 +11,7 @@ import { PhotoGallery } from "@/components/photo-gallery";
 import ContactSection from "@/components/section/contact";
 import DesignChoice from "@/components/showcase/design-choice";
 import MotionSection from "@/components/showcase/motion-section";
+import Testimonials from "@/components/testimonials";
 import PostsLoop from "@/components/showcase/posts-loop";
 import {
   demoGithubUsername,
@@ -18,6 +19,7 @@ import {
   demoPhotos,
   demoPosts,
   demoTechStacks,
+  demoTestimonials,
   demoWritingStacks,
 } from "@/components/showcase/fixtures";
 
@@ -81,6 +83,10 @@ function Showcase() {
           techStacks={demoTechStacks}
           githubUsername={demoGithubUsername}
         />
+      </AboutSection>
+
+      <AboutSection id="testimonials" title="Testimonials">
+        <Testimonials testimonials={demoTestimonials} />
       </AboutSection>
 
       <AboutSection id="motion" title="Motion">
