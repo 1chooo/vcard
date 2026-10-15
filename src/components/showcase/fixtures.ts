@@ -35,7 +35,7 @@ const demoTechStacks = {
   ],
 };
 
-const demoGithubUsername = "octocat";
+const demoGithubUsername = "1chooo";
 
 const demoPhotos = [
   {
