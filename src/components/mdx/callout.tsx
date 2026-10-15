@@ -1,171 +1,42 @@
-import cn from "clsx";
 import type { CSSProperties, FC, HTMLAttributes, ReactNode } from "react";
+
 import { SVGIcons } from "@/components/svg-icons";
+import { cn } from "@/lib/utils";
 
 const TypeToEmoji = {
-  default: <SVGIcons.GitHubTipIcon height=".8em" className="x:mt-[.3em]" />,
-  error: <SVGIcons.GitHubCautionIcon height=".8em" className="x:mt-[.3em]" />,
-  info: <SVGIcons.GitHubNoteIcon height=".8em" className="x:mt-[.3em]" />,
-  warning: <SVGIcons.GitHubWarningIcon height=".8em" className="x:mt-[.3em]" />,
-  important: (
-    <SVGIcons.GitHubImportantIcon height=".8em" className="x:mt-[.3em]" />
-  ),
+  default: <SVGIcons.GitHubTipIcon height="1em" />,
+  error: <SVGIcons.GitHubCautionIcon height="1em" />,
+  info: <SVGIcons.GitHubNoteIcon height="1em" />,
+  warning: <SVGIcons.GitHubWarningIcon height="1em" />,
+  important: <SVGIcons.GitHubImportantIcon height="1em" />,
 };
 
 type CalloutType = keyof typeof TypeToEmoji;
 
-const classes: Record<CalloutType, string> = {
-  default: cn(
-    "x:bg-green-100 x:dark:bg-green-900/30",
-    "x:text-green-700 x:dark:text-green-500",
-    "x:border-green-700 x:dark:border-green-800",
-  ),
-  error: cn(
-    "x:bg-red-100 x:dark:bg-red-900/30",
-    "x:text-red-700 x:dark:text-red-500",
-    "x:border-red-700 x:dark:border-red-600",
-  ),
-  info: cn(
-    "x:bg-blue-100 x:dark:bg-blue-900/30",
-    "x:text-blue-700 x:dark:text-blue-400",
-    "x:border-blue-700 x:dark:border-blue-600",
-  ),
-  warning: cn(
-    "x:bg-yellow-50 x:dark:bg-yellow-700/30",
-    "x:text-yellow-700 x:dark:text-yellow-500",
-    "x:border-yellow-700",
-  ),
-  important: cn(
-    "x:bg-purple-100 x:dark:bg-purple-900/30",
-    "x:text-purple-600 x:dark:text-purple-400",
-    "x:border-purple-600",
-  ),
+const typeClasses: Record<CalloutType, string> = {
+  default: "border-green-500/40 text-green-400",
+  info: "border-blue-400/40 text-blue-400",
+  warning: "border-orange-yellow-crayola/50 text-orange-yellow-crayola",
+  error: "border-red-400/40 text-red-400",
+  important: "border-purple-400/40 text-purple-400",
 };
 
 type CalloutProps = HTMLAttributes<HTMLDivElement> & {
   /**
-   * Defines the style of the callout and determines the default icon if `emoji` is not provided.
-   *
-   * If set to `null`, no border, background, or text styling will be applied.
-   * @default 'default'
+   * Callout style. `null` skips the border and type color.
+   * @default "default"
    */
   type?: CalloutType | null;
   /**
-   * Icon displayed in the callout. Can be a string emoji or a custom React element.
-   *
-   * Default values based on `type`:
-   * - `<GitHubTipIcon />` for `type: 'default'`
-   * - `<GitHubCautionIcon />` for `type: 'error'`
-   * - `<GitHubNoteIcon />` for `type: 'info'`
-   * - `<GitHubWarningIcon />` for `type: 'warning'`
-   * - `<GitHubImportantIcon />` for `type: 'important'`
-   * @default Determined by `type`
+   * Icon shown beside the text. Defaults to the GitHub icon for `type`.
    */
   emoji?: ReactNode;
 };
 
-/**
- * A built-in component to show important information to the reader.
- *
- * @see https://github.com/shuding/nextra/blob/7d0c46b2197640b26cdaea058b693bb8deb04c4a/packages/nextra/src/client/components/callout.tsx
- * @example
- * <Callout>
- *   A **callout** is a short piece of text intended to attract attention.
- * </Callout>
- *
- * <Callout type="info">
- *   A **callout** is a short piece of text intended to attract attention.
- * </Callout>
- *
- * <Callout type="warning">
- *   A **callout** is a short piece of text intended to attract attention.
- * </Callout>
- *
- * <Callout type="error">
- *   A **callout** is a short piece of text intended to attract attention.
- * </Callout>
- *
- * <Callout type="important">
- *   A **callout** is a short piece of text intended to attract attention.
- * </Callout>
- *
- * @usage
- * ### Default
- *
- * <Callout>Helpful advice for doing things better or more easily.</Callout>
- *
- * ```mdx
- * import { Callout } from 'nextra/components'
- *
- * <Callout>Helpful advice for doing things better or more easily.</Callout>
- * ```
- *
- * ### Info
- *
- * <Callout type="info">
- *   Useful information that users should know, even when skimming content.
- * </Callout>
- *
- * ```mdx
- * import { Callout } from 'nextra/components'
- *
- * <Callout type="info">
- *   Useful information that users should know, even when skimming content.
- * </Callout>
- * ```
- *
- * ### Warning
- *
- * <Callout type="warning">
- *   Urgent info that needs immediate user attention to avoid problems.
- * </Callout>
- *
- * ```mdx
- * import { Callout } from 'nextra/components'
- *
- * <Callout type="warning">
- *   Urgent info that needs immediate user attention to avoid problems.
- * </Callout>
- * ```
- *
- * ### Error
- *
- * <Callout type="error">
- *   Advises about risks or negative outcomes of certain actions.
- * </Callout>
- *
- * ```mdx
- * import { Callout } from 'nextra/components'
- *
- * <Callout type="error">
- *   Advises about risks or negative outcomes of certain actions.
- * </Callout>
- * ```
- *
- * ### Important
- *
- * <Callout type="important">
- *   Key information users need to know to achieve their goal.
- * </Callout>
- *
- * ```mdx
- * import { Callout } from 'nextra/components'
- *
- * <Callout type="important">
- *   Key information users need to know to achieve their goal.
- * </Callout>
- * ```
- *
- * ### Custom icon
- *
- * <Callout type="info" emoji="⭐">Nextra has 13k stars on GitHub!</Callout>
- *
- * ```mdx
- * import { Callout } from 'nextra/components'
- *
- * <Callout type="info" emoji="⭐">Nextra has 13k stars on GitHub!</Callout>
- * ```
- */
+const emojiStyle: CSSProperties = {
+  fontFamily: '"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
+};
+
 export const Callout: FC<CalloutProps> = ({
   className,
   type = "default",
@@ -175,23 +46,18 @@ export const Callout: FC<CalloutProps> = ({
   return (
     <div
       className={cn(
-        "nextra-callout x:overflow-x-auto x:not-first:mt-[1.25em] x:flex x:rounded-lg x:border x:py-[.5em] x:pe-[1em]",
-        "x:contrast-more:border-current!",
-        type && classes[type],
+        "my-4 flex items-start gap-3 overflow-x-auto rounded-xl border bg-eerie-black-2 px-4 py-3 text-sm leading-6 text-light-gray",
+        type ? typeClasses[type] : "border-jet",
       )}
     >
       <div
-        className="x:select-none x:text-[1.25em] x:ps-[.6em] x:pe-[.4em]"
-        style={style}
+        className="mt-0.5 shrink-0 select-none text-base"
+        style={emojiStyle}
         data-pagefind-ignore="all"
       >
         {emoji}
       </div>
-      <div className={cn("x:w-full x:min-w-0", className)} {...props} />
+      <div className={cn("min-w-0 flex-1", className)} {...props} />
     </div>
   );
-};
-
-const style: CSSProperties = {
-  fontFamily: '"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
 };
