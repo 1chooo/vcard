@@ -9,7 +9,6 @@ const routes = [
   { name: "gallery", path: "/gallery" },
   { name: "blog-post", path: "/blog/who-is-chun-ho-hugo-lin" },
   { name: "project-post", path: "/project/1chooo-com" },
-  { name: "tag-selection", path: "/tag-selection-interaction" },
 ];
 
 const viewports = [
