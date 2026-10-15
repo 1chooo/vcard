@@ -41,7 +41,7 @@ function PostCards({ posts }: PostCardsProps) {
             )}
           >
             <ViewTransitionsProgressBarLink href="/blog">
-              <AnimatedShinyText className="inline-flex items-center justify-center px-4 py-1 transition ease-out hover:text-neutral-600 hover:duration-300 hover:dark:text-neutral-400">
+              <AnimatedShinyText className="inline-flex items-center justify-center px-4 py-1 transition ease-out hover:text-neutral-600 hover:duration-300 dark:hover:text-neutral-400">
                 <span>{"✨ View All My Writings"}</span>
                 <ArrowRight className="ml-1 size-3 transition-transform duration-300 ease-in-out group-hover:translate-x-0.5" />
               </AnimatedShinyText>
@@ -92,12 +92,12 @@ function PostCard({ post, index }: PostCardProps) {
         <h2 className="flex items-center mb-3">
           <ViewTransitionsProgressBarLink
             href={postLink}
-            className="text-base font-bold leading-tight tracking-tight sm:text-lg text-white-1"
+            className="text-base font-bold leading-tight tracking-tight sm:text-lg sm:leading-7 text-white-1"
           >
             {post.title}
           </ViewTransitionsProgressBarLink>
           <svg
-            className="group-hover:translate-x-0 flex-shrink-0 translate-y-0.5 -translate-x-1 w-2.5 h-2.5 stroke-current ml-1 transition-all ease-in-out duration-200 transform text-light-gray"
+            className="group-hover:translate-x-0 shrink-0 translate-y-0.5 -translate-x-1 w-2.5 h-2.5 stroke-current ml-1 transition-all ease-in-out duration-200 transform text-light-gray"
             viewBox="0 0 13 15"
             version="1.1"
             xmlns="http://www.w3.org/2000/svg"

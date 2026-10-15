@@ -91,7 +91,7 @@ export default function App() {
           </motion.div>
           {TAGS.length > selecteds.length && (
             <motion.div
-              className="bg-white shadow-sm p-2 border w-full"
+              className="bg-white shadow-xs p-2 border w-full"
               style={{
                 borderRadius: 16,
               }}

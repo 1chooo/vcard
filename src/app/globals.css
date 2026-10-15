@@ -1,6 +1,269 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@import "../styles/tailwind-v3-colors.css";
+
+/* v3 dark mode follows the OS. Keep that even if a future Tailwind default uses .dark. */
+@custom-variant dark (@media (prefers-color-scheme: dark));
+
+@source "..";
+
+@theme {
+  --font-sans:
+    ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol", "Noto Color Emoji";
+
+  --breakpoint-custom-md: 580px;
+  --breakpoint-custom-lg: 1250px;
+
+  --color-jet: hsl(0, 0%, 22%);
+  --color-onyx: hsl(240, 1%, 17%);
+  --color-eerie-black-1: hsl(240, 2%, 13%);
+  --color-eerie-black-2: hsl(240, 2%, 12%);
+  --color-smoky-black: hsl(0, 0%, 7%);
+  --color-white-1: hsl(0, 0%, 100%);
+  --color-white-2: hsl(0, 0%, 98%);
+  --color-orange-yellow-crayola: hsl(45, 100%, 72%);
+  --color-orange-yellow-crayola-dark: hsl(45, 100%, 10%);
+  --color-vegas-gold: hsl(45, 54%, 58%);
+  --color-light-gray: hsl(0, 0%, 84%);
+  --color-light-gray-70: hsla(0, 0%, 84%, 0.7);
+  --color-bittersweet-shimmer: hsl(0, 43%, 51%);
+
+  --background-image-gradient-onyx: linear-gradient(
+    to bottom right,
+    hsl(240, 1%, 25%) 3%,
+    hsl(0, 0%, 19%) 97%
+  );
+  --background-image-gradient-jet:
+    linear-gradient(
+      to bottom right,
+      hsla(240, 1%, 18%, 0.251) 0%,
+      hsla(240, 2%, 11%, 0) 100%
+    ),
+    hsl(240, 2%, 13%);
+  --background-image-gradient-yellow-1: linear-gradient(
+    to bottom right,
+    hsl(45, 100%, 71%) 0%,
+    hsla(36, 100%, 69%, 0) 50%
+  );
+  --background-image-gradient-yellow-2:
+    linear-gradient(
+      135deg,
+      hsla(45, 100%, 71%, 0.251) 0%,
+      hsla(35, 100%, 68%, 0) 59.86%
+    ),
+    hsl(240, 2%, 13%);
+  --background-image-border-gradient-onyx: linear-gradient(
+    to bottom right,
+    hsl(0, 0%, 25%) 0%,
+    hsla(0, 0%, 25%, 0) 50%
+  );
+  --background-image-text-gradient-yellow: linear-gradient(
+    to right,
+    hsl(45, 100%, 72%),
+    hsl(35, 100%, 68%)
+  );
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+
+  --shadow-shadow-1: -4px 8px 24px hsla(0, 0%, 0%, 0.25);
+  --shadow-shadow-2: 0 16px 30px hsla(0, 0%, 0%, 0.25);
+  --shadow-shadow-3: 0 16px 40px hsla(0, 0%, 0%, 0.25);
+  --shadow-shadow-4: 0 25px 50px hsla(0, 0%, 0%, 0.15);
+  --shadow-shadow-5: 0 24px 80px hsla(0, 0%, 0%, 0.25);
+
+  --animate-shiny-text: shiny-text 8s infinite;
+  --animate-gradient: gradient 8s linear infinite;
+  --animate-marquee: marquee var(--duration) linear infinite;
+  --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite;
+  --animate-marquee-left: marquee-left var(--duration, 30s) linear infinite;
+  --animate-marquee-up: marquee-up var(--duration, 30s) linear infinite;
+
+  @keyframes shiny-text {
+    0%,
+    90%,
+    100% {
+      background-position: calc(-100% - var(--shiny-width)) 0;
+    }
+    30%,
+    60% {
+      background-position: calc(100% + var(--shiny-width)) 0;
+    }
+  }
+  @keyframes gradient {
+    to {
+      background-position: var(--bg-size) 0;
+    }
+  }
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(calc(-100% - var(--gap)));
+    }
+  }
+  @keyframes marquee-vertical {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(calc(-100% - var(--gap)));
+    }
+  }
+  @keyframes marquee-left {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(calc(-100% - var(--gap)));
+    }
+  }
+  @keyframes marquee-up {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(calc(-100% - var(--gap)));
+    }
+  }
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: var(--color-gray-400);
+    opacity: 1;
+  }
+
+  *,
+  *::before,
+  *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  img,
+  button,
+  time {
+    display: block;
+  }
+
+  a,
+  span {
+    display: inline;
+  }
+
+  button {
+    font: inherit;
+    background: none;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  input,
+  textarea {
+    display: block;
+    width: 100%;
+    background: none;
+    font: inherit;
+  }
+
+  ::selection {
+    background: var(--orange-yellow-crayola);
+    color: var(--smoky-black);
+  }
+
+  :focus {
+    outline-color: var(--orange-yellow-crayola);
+  }
+
+  body {
+    background: var(--smoky-black);
+  }
+
+  article {
+    background: var(--eerie-black-2);
+    border: 1px solid var(--jet);
+    border-radius: 20px;
+    padding: 15px;
+    box-shadow: var(--shadow-1);
+    z-index: 1;
+    display: block;
+    animation: fade 0.5s ease backwards;
+  }
+
+  main {
+    margin: 15px 12px;
+    /* margin-bottom: 75px; */
+    min-width: 259px;
+  }
+
+  @media (min-width: 580px) {
+    article {
+      width: 520px;
+      margin-inline: auto;
+      padding: 30px;
+    }
+
+    main {
+      margin-top: 60px;
+      /* margin-bottom: 100px; */
+    }
+  }
+
+  @media (min-width: 768px) {
+    article {
+      width: 700px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    article {
+      width: 950px;
+      box-shadow: var(--shadow-5);
+    }
+  }
+
+  @media (min-width: 1250px) {
+    article {
+      width: auto;
+      min-height: 100%;
+    }
+
+    main {
+      max-width: 1200px;
+      margin-inline: auto;
+      display: flex;
+      justify-content: center;
+      align-items: stretch;
+      gap: 25px;
+    }
+  }
+}
 
 :root {
   /* gradient */
@@ -103,69 +366,6 @@
   scrollbar-width: none;
 }
 
-*,
-*::before,
-*::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-a {
-  text-decoration: none;
-}
-
-img,
-button,
-time {
-  display: block;
-}
-
-a,
-span {
-  display: inline;
-}
-
-button {
-  font: inherit;
-  background: none;
-  border: none;
-  text-align: left;
-  cursor: pointer;
-}
-
-input,
-textarea {
-  display: block;
-  width: 100%;
-  background: none;
-  font: inherit;
-}
-
-::selection {
-  background: var(--orange-yellow-crayola);
-  color: var(--smoky-black);
-}
-
-:focus {
-  outline-color: var(--orange-yellow-crayola);
-}
-
-body {
-  background: var(--smoky-black);
-}
-
-article {
-  background: var(--eerie-black-2);
-  border: 1px solid var(--jet);
-  border-radius: 20px;
-  padding: 15px;
-  box-shadow: var(--shadow-1);
-  z-index: 1;
-  display: block;
-  animation: fade 0.5s ease backwards;
-}
-
 @keyframes fade {
   0% {
     opacity: 0;
@@ -238,12 +438,6 @@ article {
   background: var(--bg-gradient-jet);
   border-radius: inherit;
   z-index: -1;
-}
-
-main {
-  margin: 15px 12px;
-  /* margin-bottom: 75px; */
-  min-width: 259px;
 }
 
 /*-----------------------------------*\
@@ -456,21 +650,6 @@ textarea.form-input::-webkit-resizer {
   }
 
   /**
-  * #REUSED STYLE
-  */
-
-  article {
-    width: 520px;
-    margin-inline: auto;
-    padding: 30px;
-  }
-
-  main {
-    margin-top: 60px;
-    /* margin-bottom: 100px; */
-  }
-
-  /**
   * #CONTACT
   */
 
@@ -494,10 +673,6 @@ textarea.form-input::-webkit-resizer {
 }
 
 @media (min-width: 768px) {
-  article {
-    width: 700px;
-  }
-
   .has-scrollbar::-webkit-scrollbar-button {
     width: 100px;
   }
@@ -568,15 +743,6 @@ textarea.form-input::-webkit-resizer {
     --shadow-3: 0 16px 40px hsla(0, 0%, 0%, 0.125);
   }
 
-  article {
-    width: 950px;
-    box-shadow: var(--shadow-5);
-  }
-
-  /* main {
-    margin-bottom: 60px;
-  } */
-
   .main-content {
     position: relative;
     width: max-content;
@@ -608,20 +774,6 @@ textarea.form-input::-webkit-resizer {
 
   body::-webkit-scrollbar-button {
     height: 60px;
-  }
-
-  article {
-    width: auto;
-    min-height: 100%;
-  }
-
-  main {
-    max-width: 1200px;
-    margin-inline: auto;
-    display: flex;
-    justify-content: center;
-    align-items: stretch;
-    gap: 25px;
   }
 
   .main-content {

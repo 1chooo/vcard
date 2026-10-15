@@ -49,7 +49,7 @@ const NavBar = () => {
             onClick={() => handleNavClick("About", "/")}
             onMouseEnter={() => setHoveredPath("/")}
             onMouseLeave={() => setHoveredPath(null)}
-            className="relative block px-2 py-2 text-sm md:text-base lg:text-base duration-300 transition-colors hover:!text-orange-yellow-crayola"
+            className="relative block px-2 py-2 text-sm md:text-base lg:text-base duration-300 transition-colors hover:text-orange-yellow-crayola!"
             style={{
               color: isActive("/") ? "#FFF" : "#888888",
               fontWeight: isActive("/") ? 700 : 500,
@@ -86,7 +86,7 @@ const NavBar = () => {
             onClick={() => handleNavClick("Resume", "/resume")}
             onMouseEnter={() => setHoveredPath("/resume")}
             onMouseLeave={() => setHoveredPath(null)}
-            className="relative block px-2 py-2 text-sm md:text-base lg:text-base duration-300 transition-colors hover:!text-orange-yellow-crayola"
+            className="relative block px-2 py-2 text-sm md:text-base lg:text-base duration-300 transition-colors hover:text-orange-yellow-crayola!"
             style={{
               color: isActive("/resume") ? "#FFF" : "#888888",
               fontWeight: isActive("/resume") ? 700 : 500,
@@ -123,7 +123,7 @@ const NavBar = () => {
             onClick={() => handleNavClick("Project", "/project")}
             onMouseEnter={() => setHoveredPath("/project")}
             onMouseLeave={() => setHoveredPath(null)}
-            className="relative block px-2 py-2 text-sm md:text-base lg:text-base duration-300 transition-colors hover:!text-orange-yellow-crayola"
+            className="relative block px-2 py-2 text-sm md:text-base lg:text-base duration-300 transition-colors hover:text-orange-yellow-crayola!"
             style={{
               color: isActive("/project") ? "#FFF" : "#888888",
               fontWeight: isActive("/project") ? 700 : 500,
@@ -160,7 +160,7 @@ const NavBar = () => {
             onClick={() => handleNavClick("Blog", "/blog")}
             onMouseEnter={() => setHoveredPath("/blog")}
             onMouseLeave={() => setHoveredPath(null)}
-            className="relative block px-2 py-2 text-sm md:text-base lg:text-base duration-300 transition-colors hover:!text-orange-yellow-crayola"
+            className="relative block px-2 py-2 text-sm md:text-base lg:text-base duration-300 transition-colors hover:text-orange-yellow-crayola!"
             style={{
               color: isActive("/blog") ? "#FFF" : "#888888",
               fontWeight: isActive("/blog") ? 700 : 500,
@@ -197,7 +197,7 @@ const NavBar = () => {
             onClick={() => handleNavClick("Gallery", "/gallery")}
             onMouseEnter={() => setHoveredPath("/gallery")}
             onMouseLeave={() => setHoveredPath(null)}
-            className="relative block px-2 py-2 text-sm md:text-base lg:text-base duration-300 transition-colors hover:!text-orange-yellow-crayola"
+            className="relative block px-2 py-2 text-sm md:text-base lg:text-base duration-300 transition-colors hover:text-orange-yellow-crayola!"
             style={{
               color: isActive("/gallery") ? "#FFF" : "#888888",
               fontWeight: isActive("/gallery") ? 700 : 500,
