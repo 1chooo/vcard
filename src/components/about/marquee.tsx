@@ -50,7 +50,7 @@ const Marquee = (props: MarqueeProps) => {
             } as React.CSSProperties
           }
           className={cn(
-            "flex shrink-0 justify-around gap-[var(--gap)]",
+            "flex shrink-0 justify-around gap-(--gap)",
             direction === "left"
               ? "animate-marquee-left flex-row"
               : "animate-marquee-up flex-col",

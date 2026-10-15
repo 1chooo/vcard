@@ -57,7 +57,7 @@ function MarkdownAlert({ type, children, className }: MarkdownAlertProps) {
       )}
     >
       <Icon
-        className={cn("h-5 w-5 mt-0.5 flex-shrink-0", config.iconClassName)}
+        className={cn("h-5 w-5 mt-0.5 shrink-0", config.iconClassName)}
       />
       <div className="flex-1 space-y-2">{children}</div>
     </div>

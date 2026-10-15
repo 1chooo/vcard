@@ -187,4 +187,60 @@ Masked as non-deterministic: `#github-calendar`, `canvas` (globe), `iframe` (gis
 
 ## Refactors
 
-None yet. Each change that untangles coupled CSS will be added here with the reason.
+### Element reset moved into `@layer base`
+
+`*`, `a`, `span`, `img`, `button`, `time`, `input`, `textarea`, `body`, `article`, `main`, `::selection`, and `:focus` in [src/app/globals.css](../src/app/globals.css) now live in `@layer base`, including the responsive `article` and `main` rules. In v3 those element selectors lost to utilities. Left unlayered, v4 would let them beat utilities, which breaks `flex` on links and `items-start` on the tag-selection `<main>`. Class rules (`.content-card`, `.form-*`, `.navbar`, CSS Modules) stay unlayered so they still win ties against utilities.
+
+### v3 default border and placeholder colors
+
+`@layer base` sets the universal border color back to `gray-200` and placeholder color back to `gray-400` at full opacity. v4 would otherwise use `currentcolor`, which shows up on bare `border` utilities and on `.form-input` placeholders.
+
+### Dark variant kept on the OS setting
+
+`@custom-variant dark (@media (prefers-color-scheme: dark))` is explicit. There is no `.dark` class on `<html>`.
+
+### v3 color palette and sans font
+
+[src/styles/tailwind-v3-colors.css](../src/styles/tailwind-v3-colors.css) overrides the v4 oklch palette with the v3 hex values. `--font-sans` is pinned to the v3 stack (`ui-sans-serif, system-ui, …`). v4's default stack starts with `-apple-system` and would redraw text.
+
+### Radius overrides left on `sm` / `md` / `lg`
+
+Tailwind v4.3's bare `rounded` utility is a static `0.25rem` and the upgrade tool did not rename it. `--radius-sm`, `--radius-md`, and `--radius-lg` stay on the old overrides. `rounded-md` and `rounded-lg` stay invalid because `--radius` is still undefined. Defining `--radius` would paint corners that do not exist today.
+
+### `@reference` for stylesheets that `@apply`
+
+[src/styles/tweet.css](../src/styles/tweet.css) and [src/styles/markdown-styles.css](../src/styles/markdown-styles.css) reference the global CSS so `@apply` can see utilities. `theme()` calls in the tweet file are now `var(--color-…)` because v4 removed `theme()`. Important utilities use the trailing `!` form.
+
+### Nav blur prefix written out
+
+[src/styles/nav-bar.css](../src/styles/nav-bar.css) sets `-webkit-backdrop-filter` next to `backdrop-filter`. Autoprefixer is gone. Safari 16 and 17 still need the prefix. The production CSS contains it.
+
+### `tailwindcss-animate` removed
+
+The plugin was registered and unused. Its v3 plugin API does not load in v4. No `tw-animate-css` replacement, because nothing calls those classes.
+
+### Writing-card line height at the `sm` breakpoint
+
+[src/components/about/post-cards.tsx](../src/components/about/post-cards.tsx) uses `leading-tight` and `sm:text-lg`. In v3 the responsive font-size rule comes later in the stylesheet and replaces the line height with `1.75rem`. In v4 `leading-tight` sets `--tw-leading`, and `text-lg` keeps that tighter value. `sm:leading-7` restores the v3 `1.75rem` line height from 640px up. Mobile, where `sm:text-lg` does not apply, was already the same.
+
+### Dead utilities left dead
+
+`shadow-feature-card`, `bg-muted`, `bg-background`, `text-muted-foreground`, and `duration-250` are still undefined.
+
+## Browser support
+
+The repo browserslist (`>0.2%, not dead, not op_mini all`) is wider than Tailwind v4 (Safari 16.4+, Chrome 111+, Firefox 128+). v4 output uses cascade layers, `@property`, `color-mix`, and `oklab`. Older browsers in that list will not render it. `browserslist` was not edited.
+
+## Peer dependencies
+
+`@react-spring/zdog` still wants React 16–18 while the app is on React 19. That warning predates this upgrade. The `tailwindcss-animate` peer warning is gone with the package.
+
+## Visual diff
+
+Playwright compared 54 screenshots (9 routes, widths 390 / 768 / 1280, light and dark) against the v3 baselines in [tests/visual/baseline](../tests/visual/baseline). Result: 54 passed, 0 pixel differences (`maxDiffPixelRatio: 0`).
+
+Masked as non-deterministic: GitHub contribution calendars, globe canvases, iframes, and view counts. CSS animation and transition durations are forced to 0 inside the test so both captures show the settled UI.
+
+## Lint
+
+`pnpm lint` runs `next lint`. Next.js 16.2 no longer has that command, so the script fails before this upgrade as well. Typecheck, Vitest, and `next build --webpack` are the checks that actually run.

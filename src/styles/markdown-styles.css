@@ -1,3 +1,5 @@
+@reference "../app/globals.css";
+
 .markdown {
   font-size: 1rem;
   line-height: 1.75;
@@ -155,19 +157,19 @@
 }
 
 .markdown [data-chars-id] span {
-  @apply !text-inherit;
+  @apply text-inherit!;
 }
 
 .markdown [data-chars-id="v"] {
-  @apply !text-pink-300 bg-rose-800/50 border-b-pink-600 font-bold;
+  @apply text-pink-300! bg-rose-800/50 border-b-pink-600 font-bold;
 }
 
 .markdown [data-chars-id="s"] {
-  @apply !text-yellow-300 bg-yellow-800/50 border-b-yellow-600 font-bold;
+  @apply text-yellow-300! bg-yellow-800/50 border-b-yellow-600 font-bold;
 }
 
 .markdown [data-chars-id="i"] {
-  @apply !text-purple-200 bg-purple-800/50 border-b-purple-600 font-bold;
+  @apply text-purple-200! bg-purple-800/50 border-b-purple-600 font-bold;
 }
 
 .markdown code[data-line-numbers] {

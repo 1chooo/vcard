@@ -62,7 +62,7 @@ const Photo = ({
       onHoverStart={() => setIsVisible(true)}
       onHoverEnd={() => setIsVisible(false)}
       className={clsx(
-        "relative aspect-[9/10] w-44 flex-none overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800",
+        "relative aspect-9/10 w-44 flex-none overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800",
       )}
     >
       <Image
@@ -79,7 +79,7 @@ const Photo = ({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1, transition: { duration: 0.2 } }}
             exit={{ opacity: 0 }}
-            className="absolute inset-0 w-full bg-gradient-to-t from-black/75 via-black/0 flex items-end"
+            className="absolute inset-0 w-full bg-linear-to-t from-black/75 via-black/0 flex items-end"
           >
             <h3 className="px-3 py-2 font-mono text-xs font-bold text-white-1">
               {title}

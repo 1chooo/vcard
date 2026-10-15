@@ -25,7 +25,7 @@ function ResumeCard({ resumePost }: ResumeCardProps) {
       <div className="hover:scale-105 duration-300">
         <div className={cn(styles["resume-card"])}>
           <div className="flex flex-row items-center gap-4 p-6 pb-4 cursor-pointer transition-colors rounded-t-md">
-            <div className="h-10 w-10 flex-shrink-0 overflow-hidden rounded-md">
+            <div className="h-10 w-10 shrink-0 overflow-hidden rounded-md">
               <Image
                 src={institutionImage || "/favicon.ico"}
                 alt={institution}

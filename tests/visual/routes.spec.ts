@@ -46,17 +46,17 @@ async function settle(page: Page) {
   await page.addStyleTag({
     content: `
       *, *::before, *::after {
-        animation: none !important;
-        transition: none !important;
+        animation-duration: 0s !important;
+        animation-delay: 0s !important;
+        transition-duration: 0s !important;
+        transition-delay: 0s !important;
         caret-color: transparent !important;
       }
     `,
   });
   await revealInView(page);
-  await page.waitForTimeout(2_000);
+  await page.waitForTimeout(500);
 }
-
-test.describe.configure({ mode: "serial" });
 
 for (const colorScheme of colorSchemes) {
   for (const viewport of viewports) {
