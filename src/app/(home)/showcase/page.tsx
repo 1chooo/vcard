@@ -9,6 +9,7 @@ import { Photos } from "@/components/about/photos";
 import { MyWritings } from "@/components/about/my-writings";
 import { PhotoGallery } from "@/components/photo-gallery";
 import ContactSection from "@/components/section/contact";
+import { Callout } from "@/components/mdx/callout";
 import DesignList from "@/components/showcase/design-list";
 import { NavbarPreview } from "@/components/showcase/navbar-preview";
 import MotionSection from "@/components/showcase/motion-section";
@@ -99,6 +100,24 @@ function Showcase() {
           techStacks={demoTechStacks}
           githubUsername={demoGithubUsername}
         />
+      </AboutSection>
+
+      <AboutSection id="callouts" title="Callouts">
+        <div className="space-y-3">
+          <Callout>Helpful advice for doing something more easily.</Callout>
+          <Callout type="info">
+            Useful information, even when skimming the page.
+          </Callout>
+          <Callout type="warning">
+            Urgent detail that needs attention before continuing.
+          </Callout>
+          <Callout type="error">
+            This action can fail or remove something you still need.
+          </Callout>
+          <Callout type="important">
+            Key information required to finish the task.
+          </Callout>
+        </div>
       </AboutSection>
 
       <AboutSection id="testimonials" title="Testimonials">
