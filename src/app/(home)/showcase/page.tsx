@@ -10,6 +10,7 @@ import { MyWritings } from "@/components/about/my-writings";
 import { PhotoGallery } from "@/components/photo-gallery";
 import ContactSection from "@/components/section/contact";
 import DesignChoice from "@/components/showcase/design-choice";
+import MotionSection from "@/components/showcase/motion-section";
 import PostsLoop from "@/components/showcase/posts-loop";
 import {
   demoGithubUsername,
@@ -80,6 +81,10 @@ function Showcase() {
           techStacks={demoTechStacks}
           githubUsername={demoGithubUsername}
         />
+      </AboutSection>
+
+      <AboutSection id="motion" title="Motion">
+        <MotionSection />
       </AboutSection>
     </article>
   );
