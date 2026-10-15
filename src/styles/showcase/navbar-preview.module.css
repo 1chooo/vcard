@@ -1,0 +1,76 @@
+.bar {
+  position: relative;
+  width: 100%;
+  background: hsla(240, 1%, 17%, 0.75);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--jet);
+  border-radius: 20px;
+  box-shadow: var(--shadow-2);
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 8px 12px;
+  list-style: none;
+}
+
+.classicLink,
+.classicActive,
+.currentLink {
+  display: block;
+  padding: 12px 10px;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.classicLink {
+  color: var(--light-gray);
+  font-weight: 500;
+}
+
+.classicLink:hover {
+  color: var(--light-gray-70);
+}
+
+.classicActive {
+  color: var(--orange-yellow-crayola);
+  font-weight: 700;
+}
+
+.currentLink {
+  position: relative;
+  cursor: default;
+}
+
+.hoverBg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: 12px;
+  background: rgb(255 255 255 / 10%);
+}
+
+.activeLine,
+.hoverLine {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+}
+
+.activeLine {
+  background: var(--orange-yellow-crayola);
+}
+
+.hoverLine {
+  background: #fff;
+}

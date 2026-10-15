@@ -10,6 +10,7 @@ import { MyWritings } from "@/components/about/my-writings";
 import { PhotoGallery } from "@/components/photo-gallery";
 import ContactSection from "@/components/section/contact";
 import DesignChoice from "@/components/showcase/design-choice";
+import { ClassicNav, CurrentNav } from "@/components/showcase/navbar-preview";
 import MotionSection from "@/components/showcase/motion-section";
 import Testimonials from "@/components/testimonials";
 import PostsLoop from "@/components/showcase/posts-loop";
@@ -37,6 +38,10 @@ function Showcase() {
         Section designs that used to sit on the about page. Switching a version
         only changes this page.
       </p>
+
+      <AboutSection id="navbar" title="Navbar">
+        <DesignChoice earlier={<ClassicNav />} current={<CurrentNav />} />
+      </AboutSection>
 
       <AboutSection id="contact" title="Contact">
         <DesignChoice
