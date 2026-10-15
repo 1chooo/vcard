@@ -5,7 +5,7 @@ Recorded before the v4 upgrade on branch `chore/tailwind-v4`. This file is the s
 ## Stack
 
 - Repo: `1chooo/portfolio` (`1chooo-com-web`)
-- Next.js 16.2.10, React 19.2.7, TypeScript, webpack (`next dev --webpack`, `next build --webpack`)
+- Next.js 16.2.10, React 19.2.7, TypeScript. Dev and build use Turbopack. See [dev-compile.md](dev-compile.md). The v3 audit below was taken while the scripts still passed `--webpack`.
 - PostCSS via [postcss.config.cjs](../postcss.config.cjs). No Vite plugin, no SCSS, no styled-components.
 - Styling mix: Tailwind utilities in TSX, one global stylesheet, plain global CSS imported from components, and CSS Modules.
 - Package manager: pnpm. Lockfile: [pnpm-lock.yaml](../pnpm-lock.yaml).
@@ -165,7 +165,7 @@ Tailwind v4's engine floor is Safari 16.4+, Chrome 111+, and Firefox 128+. The r
 | `class-variance-authority` | ^0.7.1 | No upgrade |
 | `@tailwindcss/typography`, `forms`, Headless UI, shadcn CLI, eslint/prettier Tailwind plugins | not installed | Nothing to migrate |
 
-Build integration is `@tailwindcss/postcss`. Do not add `@tailwindcss/vite`. Keep `--webpack`.
+Build integration is `@tailwindcss/postcss`. Do not add `@tailwindcss/vite`. Dev and build stay on Turbopack. See [dev-compile.md](dev-compile.md).
 
 Tests under `src/__tests__` do not import CSS. Vitest does not need a Tailwind plugin.
 
@@ -243,4 +243,4 @@ Masked as non-deterministic: GitHub contribution calendars, globe canvases, ifra
 
 ## Lint
 
-`pnpm lint` runs `next lint`. Next.js 16.2 no longer has that command, so the script fails before this upgrade as well. Typecheck, Vitest, and `next build --webpack` are the checks that actually run.
+`pnpm lint` runs `next lint`. Next.js 16.2 no longer has that command, so the script fails before this upgrade as well. Typecheck, Vitest, and `next build` are the checks that actually run.
