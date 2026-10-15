@@ -5,7 +5,9 @@ import { AnimatePresence, motion } from "motion/react";
 import { BlurFade } from "@/components/magicui/blur-fade";
 import Image from "next/image";
 
-const images = [
+type GalleryImage = { src: string; alt: string; title: string };
+
+const defaultImages: GalleryImage[] = [
   {
     src: "/images/photo/usc.webp",
     alt: "USC",
@@ -37,7 +39,7 @@ const PhotoItem = ({
   image,
   idx,
 }: {
-  image: { src: string; alt: string; title: string };
+  image: GalleryImage;
   idx: number;
 }) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -77,7 +79,11 @@ const PhotoItem = ({
   );
 };
 
-export function PhotoGallery() {
+export function PhotoGallery({
+  images = defaultImages,
+}: {
+  images?: GalleryImage[];
+}) {
   return (
     <section id="photos">
       <div className="columns-2 gap-4 sm:columns-3">

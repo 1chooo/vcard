@@ -5,11 +5,14 @@ import AboutSection from "@/components/section/about";
 import LifeStyles from "@/components/about/life-styles";
 import CodingStats from "@/components/about/coding-stats";
 import TalkToHugo from "@/components/about/talk-to-hugo";
+import { Photos } from "@/components/about/photos";
+import { PhotoGallery } from "@/components/photo-gallery";
 import ContactSection from "@/components/section/contact";
 import DesignChoice from "@/components/showcase/design-choice";
 import {
   demoGithubUsername,
   demoLifestyles,
+  demoPhotos,
   demoTechStacks,
 } from "@/components/showcase/fixtures";
 
@@ -37,6 +40,21 @@ function Showcase() {
 
       <AboutSection id="life-styles" title="Life Styles">
         <LifeStyles lifestyles={demoLifestyles} />
+      </AboutSection>
+
+      <AboutSection id="photos" title="Photos">
+        <DesignChoice
+          earlier={
+            <Photos
+              images={demoPhotos.map((photo) => ({
+                img: photo.src,
+                title: photo.title,
+                alt: photo.alt,
+              }))}
+            />
+          }
+          current={<PhotoGallery images={demoPhotos} />}
+        />
       </AboutSection>
 
       <AboutSection id="coding-stats" title="Coding Stats">

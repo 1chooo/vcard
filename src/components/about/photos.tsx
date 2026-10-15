@@ -5,7 +5,9 @@ import clsx from "clsx";
 import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
 
-const travelImages: { img: string; title: string; alt: string }[] = [
+type PhotoImage = { img: string; title: string; alt: string };
+
+const travelImages: PhotoImage[] = [
   {
     img: "/images/photo/usc.webp",
     title: "USC",
@@ -91,11 +93,11 @@ const Photo = ({
   );
 };
 
-export const Photos = () => {
+export const Photos = ({ images = travelImages }: { images?: PhotoImage[] }) => {
   return (
     <div className="my-8">
       <div className="hide-scrollbar -my-4 flex gap-8 overflow-y-auto py-4 md:px-8">
-        {travelImages.map((travelImage, index) => (
+        {images.map((travelImage, index) => (
           <Photo
             key={travelImage.title}
             img={travelImage.img}
