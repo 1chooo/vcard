@@ -348,15 +348,6 @@
   #RESET
 \*-----------------------------------*/
 
-.tag-no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-
-.tag-no-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
 }

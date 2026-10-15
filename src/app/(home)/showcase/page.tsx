@@ -14,8 +14,6 @@ import DesignList from "@/components/showcase/design-list";
 import { ImmediateMotion } from "@/components/showcase/immediate-motion";
 import { NavbarPreview } from "@/components/showcase/navbar-preview";
 import MotionSection from "@/components/showcase/motion-section";
-import TagPicker from "@/components/showcase/tag-picker";
-import WebVitals from "@/components/showcase/web-vitals";
 import Testimonials from "@/components/testimonials";
 import PostsLoop from "@/components/showcase/posts-loop";
 import {
@@ -126,14 +124,6 @@ function Showcase() {
 
       <AboutSection id="testimonials" title="Testimonials">
         <Testimonials testimonials={demoTestimonials} />
-      </AboutSection>
-
-      <AboutSection id="tags" title="Tags">
-        <TagPicker />
-      </AboutSection>
-
-      <AboutSection id="web-vitals" title="Web Vitals">
-        <WebVitals />
       </AboutSection>
 
       <AboutSection id="motion" title="Motion">
