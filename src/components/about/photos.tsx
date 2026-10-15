@@ -5,6 +5,8 @@ import clsx from "clsx";
 import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
 
+import { useImmediateMotion } from "@/components/showcase/immediate-motion";
+
 type PhotoImage = { img: string; title: string; alt: string };
 
 const travelImages: PhotoImage[] = [
@@ -49,23 +51,32 @@ const Photo = ({
   idx: number;
 }) => {
   const [isVisible, setIsVisible] = useState(false);
+  const immediate = useImmediateMotion();
+
+  const motionProps = {
+    whileHover: { scale: 1.1, rotate: 0, transition: { duration: 0.2 } },
+    onHoverStart: () => setIsVisible(true),
+    onHoverEnd: () => setIsVisible(false),
+    className: clsx(
+      "relative aspect-9/10 w-44 flex-none overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800",
+    ),
+  };
 
   return (
     <motion.div
       key={img}
+      {...motionProps}
       initial={{
         scale: 1,
         rotate: possibleRotations[idx % possibleRotations.length],
-        opacity: 0,
+        opacity: immediate ? 1 : 0,
       }}
-      whileHover={{ scale: 1.1, rotate: 0, transition: { duration: 0.2 } }}
-      whileInView={{ opacity: 1, transition: { delay: idx / 100 } }}
-      viewport={{ once: true }}
-      onHoverStart={() => setIsVisible(true)}
-      onHoverEnd={() => setIsVisible(false)}
-      className={clsx(
-        "relative aspect-9/10 w-44 flex-none overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800",
-      )}
+      {...(immediate
+        ? {}
+        : {
+            whileInView: { opacity: 1, transition: { delay: idx / 100 } },
+            viewport: { once: true as const },
+          })}
     >
       <Image
         src={img}

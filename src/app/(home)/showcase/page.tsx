@@ -11,6 +11,7 @@ import { PhotoGallery } from "@/components/photo-gallery";
 import ContactSection from "@/components/section/contact";
 import { Callout } from "@/components/mdx/callout";
 import DesignList from "@/components/showcase/design-list";
+import { ImmediateMotion } from "@/components/showcase/immediate-motion";
 import { NavbarPreview } from "@/components/showcase/navbar-preview";
 import MotionSection from "@/components/showcase/motion-section";
 import TagPicker from "@/components/showcase/tag-picker";
@@ -35,7 +36,8 @@ export const metadata: Metadata = {
 
 function Showcase() {
   return (
-    <article>
+    <ImmediateMotion>
+      <article>
       <PageTitle title="Showcase" />
       <p className="text-light-gray text-sm leading-6">
         Section designs that used to sit on the about page.
@@ -138,6 +140,7 @@ function Showcase() {
         <MotionSection />
       </AboutSection>
       </article>
+    </ImmediateMotion>
   );
 }
 

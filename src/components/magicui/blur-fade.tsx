@@ -10,6 +10,8 @@ import {
 } from "motion/react";
 import { useRef } from "react";
 
+import { useImmediateMotion } from "@/components/showcase/immediate-motion";
+
 type MarginType = UseInViewOptions["margin"];
 
 interface BlurFadeProps extends MotionProps {
@@ -43,8 +45,9 @@ export function BlurFade({
   ...props
 }: BlurFadeProps) {
   const ref = useRef(null);
+  const immediate = useImmediateMotion();
   const inViewResult = useInView(ref, { once: true, margin: inViewMargin });
-  const isInView = !inView || inViewResult;
+  const isInView = immediate || !inView || inViewResult;
   const defaultVariants: Variants = {
     hidden: {
       [direction === "left" || direction === "right" ? "x" : "y"]:
@@ -63,8 +66,8 @@ export function BlurFade({
     <AnimatePresence>
       <motion.div
         ref={ref}
-        initial="hidden"
-        animate={isInView ? "visible" : "hidden"}
+        initial={immediate ? false : "hidden"}
+        animate={immediate || isInView ? "visible" : "hidden"}
         exit="hidden"
         variants={combinedVariants}
         transition={{
@@ -95,8 +98,9 @@ export function BlurFadeLi({
   ...props
 }: BlurFadeProps) {
   const ref = useRef(null);
+  const immediate = useImmediateMotion();
   const inViewResult = useInView(ref, { once: true, margin: inViewMargin });
-  const isInView = !inView || inViewResult;
+  const isInView = immediate || !inView || inViewResult;
   const defaultVariants: Variants = {
     hidden: {
       [direction === "left" || direction === "right" ? "x" : "y"]:
@@ -115,8 +119,8 @@ export function BlurFadeLi({
     <AnimatePresence>
       <motion.li
         ref={ref}
-        initial="hidden"
-        animate={isInView ? "visible" : "hidden"}
+        initial={immediate ? false : "hidden"}
+        animate={immediate || isInView ? "visible" : "hidden"}
         exit="hidden"
         variants={combinedVariants}
         transition={{
