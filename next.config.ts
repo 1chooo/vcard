@@ -2,8 +2,13 @@ import type { NextConfig } from "next";
 import createMDX from "@next/mdx";
 
 const nextConfig: NextConfig = {
+  turbopack: {},
   experimental: {
     optimizePackageImports: ["next-mdx-remote", "shiki"],
+    mdxRs: {
+      mdxType: "gfm",
+    },
+    turbopackFileSystemCacheForDev: true,
   },
   reactStrictMode: true,
   images: {
@@ -68,12 +73,7 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
 });
 
 const withMDX = createMDX({
-  // Add markdown plugins here, as desired
   extension: /\.(md|mdx)$/,
-  options: {
-    remarkPlugins: [],
-    rehypePlugins: [],
-  },
 });
 
 module.exports = withBundleAnalyzer(withMDX(nextConfig));

@@ -26,8 +26,8 @@
     "markdown"
   ],
   "scripts": {
-    "dev": "next dev --webpack",
-    "build": "next build --webpack",
+    "dev": "next dev",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "check-types": "tsc --noEmit",
